@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaRegHeart } from "react-icons/fa";
 import { GrCart } from "react-icons/gr";
@@ -9,6 +9,7 @@ import user_icon from "../../assets/images/user-icon.png";
 import "./Header.css";
 
 import { Container, Row } from "reactstrap";
+import { useSelector } from "react-redux";
 
 const nav__links = [
   {
@@ -28,6 +29,10 @@ const nav__links = [
 const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
+  const navigate = useNavigate()
+
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  
 
   const stickHeaderFunc = () => {
     if (window.scrollY > 80) {
@@ -45,7 +50,7 @@ const Header = () => {
     };
   }, []);
 
-  const menuToggle = () => menuRef.current.classList.toggle('active__menu')
+  const menuToggle = () => menuRef.current.classList.toggle("active__menu");
 
   return (
     <header className="header" ref={headerRef}>
@@ -54,7 +59,7 @@ const Header = () => {
           <div className="nav__wrapper">
             <div className="logo">
               <img src={logo} alt="logo" />
-              <div>
+              <div onClick={() => navigate("/")}>
                 <h1>Multimart</h1>
               </div>
             </div>
@@ -83,7 +88,7 @@ const Header = () => {
               </span>
               <span className="cart__icon">
                 <GrCart size={"22px"} />
-                <span className="badge">1</span>
+                <span className="badge">{totalQuantity}</span>
               </span>
 
               <span>

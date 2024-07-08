@@ -20,12 +20,14 @@
 .logo img {
   width: 1.5rem;
   height: 1.5rem;
+  cursor: pointer;
 }
 
 .logo h1 {
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--primary-color);
+  cursor: pointer;
 }
 
 .menu {

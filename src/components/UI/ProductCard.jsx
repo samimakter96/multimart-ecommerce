@@ -4,8 +4,25 @@ import { motion } from "framer-motion";
 import { Col } from "reactstrap";
 import "../../styles/ProductCard.css";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../redux/slices/cartSlice";
+import { toast } from 'react-toastify';
 
 const ProductCard = ({ item }) => {
+  const dispatch = useDispatch();
+
+  const addToCart = () => {
+    dispatch(
+      addItem({
+        id: item.id,
+        productName: item.productName,
+        price: item.price,
+        image: item.imageUrl,
+      })
+    );
+
+    toast.success(`${item.productName} added to cart`)
+  };
   return (
     <Col lg="3" md="4" className="mb-2">
       <div className="product__item">
@@ -20,7 +37,7 @@ const ProductCard = ({ item }) => {
         </Link>
         <div className="product__card-bottom d-flex align-items-center justify-content-between p-2">
           <span className="price">${item.price}</span>
-          <motion.span whileTap={{ scale: 1.2 }}>
+          <motion.span whileTap={{ scale: 1.2 }} onClick={addToCart}>
             <FiPlus className="plus__btn" />
           </motion.span>
         </div>
