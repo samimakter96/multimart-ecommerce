@@ -1,6 +1,5 @@
 import React from "react";
 import "./Services.css";
-import { CiDeliveryTruck } from "react-icons/ci";
 
 import { Container, Row, Col } from "reactstrap";
 import { motion } from "framer-motion";
@@ -19,7 +18,7 @@ const Services = () => {
                 style={{ background: `${item.bg}` }}
               >
                 <span>
-                  <i class={item.icon}></i>
+                  <i className={item.icon}></i>
                 </span>
                 <div>
                   <h3>{item.title}</h3>
