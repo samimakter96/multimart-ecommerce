@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaRegHeart } from "react-icons/fa";
@@ -26,8 +26,29 @@ const nav__links = [
 ];
 
 const Header = () => {
+  const headerRef = useRef(null);
+  const menuRef = useRef(null);
+
+  const stickHeaderFunc = () => {
+    if (window.scrollY > 80) {
+      headerRef.current.classList.add("stick__header");
+    } else {
+      headerRef.current.classList.remove("stick__header");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", stickHeaderFunc);
+
+    return () => {
+      window.removeEventListener("scroll", stickHeaderFunc);
+    };
+  }, []);
+
+  const menuToggle = () => menuRef.current.classList.toggle('active__menu')
+
   return (
-    <header className="header">
+    <header className="header" ref={headerRef}>
       <Container>
         <Row>
           <div className="nav__wrapper">
@@ -35,11 +56,10 @@ const Header = () => {
               <img src={logo} alt="logo" />
               <div>
                 <h1>Multimart</h1>
-                {/* <p>Since 1996</p> */}
               </div>
             </div>
 
-            <div className="navigation">
+            <div className="navigation" ref={menuRef} onClick={menuToggle}>
               <ul className="menu">
                 {nav__links.map((item, index) => (
                   <li key={index} className="nav__item">
@@ -67,14 +87,17 @@ const Header = () => {
               </span>
 
               <span>
-                <motion.img whileTap={{scale: 1.2}} src={user_icon} alt="user_icon" />
+                <motion.img
+                  whileTap={{ scale: 1.2 }}
+                  src={user_icon}
+                  alt="user_icon"
+                />
               </span>
-            </div>
-
-            <div className="mobile__menu">
-              <span>
-                <IoMdMenu size={"25px"} />
-              </span>
+              <div className="mobile__menu">
+                <span onClick={menuToggle}>
+                  <IoMdMenu size={"25px"} />
+                </span>
+              </div>
             </div>
           </div>
         </Row>
