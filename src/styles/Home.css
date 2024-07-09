@@ -31,7 +31,7 @@
 }
 
 .buy__btn:hover {
-  color: var(--primary-color);
+  color: #ddd;
 }
 
 .hero__content {
