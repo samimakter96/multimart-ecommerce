@@ -5,6 +5,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { toast } from "react-toastify";
 
+
 import "../styles/Login.css";
 
 const Login = () => {
@@ -26,7 +27,6 @@ const Login = () => {
       );
 
       const user = userCredential.user;
-      console.log(user);
       setLoading(false);
       toast.success("Logged in successfully!");
       navigate("/");

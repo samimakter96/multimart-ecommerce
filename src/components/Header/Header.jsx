@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaRegHeart } from "react-icons/fa";
 import { GrCart } from "react-icons/gr";
@@ -10,6 +10,10 @@ import "./Header.css";
 
 import { Container, Row } from "reactstrap";
 import { useSelector } from "react-redux";
+import useAuth from "../../customHooks/useAuth";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebaseConfig";
+import { toast } from "react-toastify";
 
 const nav__links = [
   {
@@ -29,10 +33,11 @@ const nav__links = [
 const Header = () => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
-  const navigate = useNavigate()
-
+  const navigate = useNavigate();
+  const { currentUser } = useAuth();
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-  
+
+  const profileActionRef = useRef(null);
 
   const stickHeaderFunc = () => {
     if (window.scrollY > 80) {
@@ -40,6 +45,15 @@ const Header = () => {
     } else {
       headerRef.current.classList.remove("stick__header");
     }
+  };
+
+  const logout = () => {
+    signOut(auth).then(() => {
+      toast.success("Logged Out Successfully");
+      navigate("/login");
+    }).catch((error) => {
+      toast.error(error.message);
+    });
   };
 
   useEffect(() => {
@@ -52,16 +66,18 @@ const Header = () => {
 
   const menuToggle = () => menuRef.current.classList.toggle("active__menu");
 
+  const toggleProfileActions = () => {
+    profileActionRef.current.classList.toggle("show__profileActions");
+  };
+
   return (
     <header className="header" ref={headerRef}>
       <Container>
         <Row>
           <div className="nav__wrapper">
-            <div className="logo">
+            <div className="logo" onClick={() => navigate("/")}>
               <img src={logo} alt="logo" />
-              <div onClick={() => navigate("/")}>
-                <h1>Multimart</h1>
-              </div>
+              <h1>Multimart</h1>
             </div>
 
             <div className="navigation" ref={menuRef} onClick={menuToggle}>
@@ -91,13 +107,27 @@ const Header = () => {
                 <span className="badge">{totalQuantity}</span>
               </span>
 
-              <span>
+              <div className="profile">
                 <motion.img
                   whileTap={{ scale: 1.2 }}
-                  src={user_icon}
+                  src={currentUser ? currentUser.photoURL : user_icon}
                   alt="user_icon"
+                  onClick={toggleProfileActions}
                 />
-              </span>
+                <div
+                  className="profile__actions"
+                  ref={profileActionRef}
+                >
+                  {currentUser ? (
+                    <span onClick={logout}>Logout</span>
+                  ) : (
+                    <div className="d-flex align-items-center justify-content-center flex-column">
+                      <Link to="/signup">Signup</Link>
+                      <Link to="/login">Login</Link>
+                    </div>
+                  )}
+                </div>
+              </div>
               <div className="mobile__menu">
                 <span onClick={menuToggle}>
                   <IoMdMenu size={"25px"} />

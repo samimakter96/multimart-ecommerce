@@ -5,7 +5,7 @@ import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDGkOxJiOKcIq3swT-1PdsZXRHoUubHwIM",
+  apiKey: import.meta.env.VITE_MULTIMART_API_KEY,
   authDomain: "multimart-ecommerce-191cf.firebaseapp.com",
   projectId: "multimart-ecommerce-191cf",
   storageBucket: "multimart-ecommerce-191cf.appspot.com",
