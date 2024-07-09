@@ -41,7 +41,7 @@ const AdminNav = () => {
               <div className="search__box">
                 <input type="text" placeholder="Search...." />
                 <span>
-                  <i class="ri-search-line"></i>
+                  <i className="ri-search-line"></i>
                 </span>
               </div>
               <div className="admin__nav-top-right">
