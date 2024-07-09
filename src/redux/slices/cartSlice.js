@@ -25,9 +25,9 @@ const cartSlice = createSlice({
       if (!existingItem) {
         // If the item does not exist in the cart, add it
         state.cartItems.push({
-          id: newItem.id, 
+          id: newItem.id,
           productName: newItem.productName,
-          image: newItem.imgUrl,
+          imgUrl: newItem.imgUrl,
           price: newItem.price,
           quantity: 1, // Set the quantity to 1 for new item
           totalPrice: newItem.price, // Set the total price for this item
@@ -45,12 +45,24 @@ const cartSlice = createSlice({
         0 // Initial value for the reduce function
       );
     },
-  },
 
+    deleteItem: (state, action) => {
+      const id = action.payload;
+      const existingItem = state.cartItems.find((item) => item.id === id);
+
+      if (existingItem) {
+        state.cartItems = state.cartItems.filter((item) => item.id !== id);
+        state.totalQuantity -= existingItem.quantity;
+      }
+
+      state.totalAmount = state.cartItems.reduce(
+        (total, item) => total + Number(item.totalPrice),
+        0 
+      );
+    },
+  },
 });
 
 // Export the addItem action and the cart reducer
-export const { addItem } = cartSlice.actions;
+export const { addItem, deleteItem } = cartSlice.actions;
 export default cartSlice.reducer;
-
-

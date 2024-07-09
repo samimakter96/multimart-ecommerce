@@ -86,7 +86,7 @@ const Header = () => {
                 <FaRegHeart size={"22px"} />
                 <span className="badge">1</span>
               </span>
-              <span className="cart__icon">
+              <span className="cart__icon" onClick={() => navigate("/cart")}>
                 <GrCart size={"22px"} />
                 <span className="badge">{totalQuantity}</span>
               </span>
