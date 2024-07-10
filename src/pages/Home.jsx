@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import products from "../assets/data/products";
 import { Container, Row, Col } from "reactstrap";
 import heroImg from "../assets/images/hero-img.png";
 import "../styles/Home.css";
@@ -10,12 +9,16 @@ import ProductList from "../components/UI/ProductList";
 import counterImg from "../assets/images/counter-timer-img.png";
 import Clock from "../components/UI/Clock";
 
+import useGetData from "../customHooks/useGetData";
+
 const Home = () => {
+  const { data: products, loading } = useGetData("products");
+
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [bestSalesProducts, setBestSalesProducts] = useState([]);
-  const  [mobileProducts, setMobileProducts] = useState([]);
-  const  [wirelessProducts, setWirelessProducts] = useState([]);
-  const  [popularProducts, setPopularProducts] = useState([]);
+  const [mobileProducts, setMobileProducts] = useState([]);
+  const [wirelessProducts, setWirelessProducts] = useState([]);
+  const [popularProducts, setPopularProducts] = useState([]);
 
   const year = new Date().getFullYear();
 
@@ -45,8 +48,7 @@ const Home = () => {
     setMobileProducts(filteredMobileProducts);
     setWirelessProducts(filteredWirelessProducts);
     setPopularProducts(filteredPopularProducts);
-
-  }, []);
+  }, [products]);
 
   return (
     <>
@@ -85,7 +87,11 @@ const Home = () => {
             <Col lg="12" className="text-center">
               <h2 className="section__title">Trending Products</h2>
             </Col>
-            <ProductList data={trendingProducts} />
+            {loading ? (
+              <h5 className="fw-bold">Loading....</h5>
+            ) : (
+              <ProductList data={trendingProducts} />
+            )}
           </Row>
         </Container>
       </section>
@@ -96,7 +102,11 @@ const Home = () => {
             <Col lg="12" className="text-center">
               <h2 className="section__title">Best Sales</h2>
             </Col>
-            <ProductList data={bestSalesProducts} />
+            {loading ? (
+              <h5 className="fw-bold">Loading....</h5>
+            ) : (
+              <ProductList data={bestSalesProducts} />
+            )}
           </Row>
         </Container>
       </section>
@@ -105,13 +115,18 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="6" md="6" className="count__down-col">
-            <div className="clock__top-content">
-              <h4 className="text-white fs-6 mb-2">Limited Offers</h4>
-              <h3 className="text-white fs-5 mb-3">Quality Armchair</h3>
-            </div>
+              <div className="clock__top-content">
+                <h4 className="text-white fs-6 mb-2">Limited Offers</h4>
+                <h3 className="text-white fs-5 mb-3">Quality Armchair</h3>
+              </div>
               <Clock />
 
-              <motion.button whileTap={{scale: 1.2}} className="buy__btn store__btn"><Link to='/shop'>Visit Store</Link></motion.button>
+              <motion.button
+                whileTap={{ scale: 1.2 }}
+                className="buy__btn store__btn"
+              >
+                <Link to="/shop">Visit Store</Link>
+              </motion.button>
             </Col>
             <Col lg="6" md="6" className="text-end counter__img">
               <img src={counterImg} alt="" />
@@ -123,11 +138,19 @@ const Home = () => {
       <section className="new__arrivals">
         <Container>
           <Row>
-          <Col lg="12" className="text-center mb-5">
+            <Col lg="12" className="text-center mb-5">
               <h2 className="section__title">New Arrivals</h2>
             </Col>
-            <ProductList data={mobileProducts}/>
-            <ProductList data={wirelessProducts}/>
+            {loading ? (
+              <h5 className="fw-bold">Loading....</h5>
+            ) : (
+              <ProductList data={mobileProducts} />
+            )}
+            {loading ? (
+              <h5 className="fw-bold">Loading....</h5>
+            ) : (
+              <ProductList data={wirelessProducts} />
+            )}
           </Row>
         </Container>
       </section>
@@ -138,7 +161,11 @@ const Home = () => {
             <Col lg="12" className="text-center mb-5">
               <h2 className="section__title">Popular Category</h2>
             </Col>
-            <ProductList data={popularProducts} />
+            {loading ? (
+              <h5 className="fw-bold">Loading....</h5>
+            ) : (
+              <ProductList data={popularProducts} />
+            )}
           </Row>
         </Container>
       </section>

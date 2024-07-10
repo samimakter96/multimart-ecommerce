@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { useParams } from "react-router-dom";
-import products from "../assets/data/products";
 import CommonSection from "../components/UI/CommonSection";
 import { IoStar } from "react-icons/io5";
 import { IoStarHalf } from "react-icons/io5";
@@ -12,14 +11,21 @@ import { useDispatch } from "react-redux";
 import { addItem } from "../redux/slices/cartSlice";
 import { toast } from "react-toastify";
 
+import { db } from "../firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
+import useGetData from "../customHooks/useGetData";
+
 const ProductDetails = () => {
+  const [product, setProduct] = useState({});
   const [tab, setTab] = useState("desc");
   const [rating, setRating] = useState(null);
-  const [reviews, setReviews] = useState([{
-    userName: "John Doe",
-    message: "This product is great!",
-    rating: 4.5,
-  }])
+  const [reviews, setReviews] = useState([
+    {
+      userName: "John Doe",
+      message: "This product is great!",
+      rating: 4.5,
+    },
+  ]);
 
   const reviewUser = useRef("");
   const reviewMsg = useRef("");
@@ -27,13 +33,29 @@ const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const product = products.find((item) => item.id === id);
+  const { data: products } = useGetData("products");
+
+  const docRef = doc(db, "products", id);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setProduct(docSnap.data());
+      } else {
+        console.log("no product!");
+      }
+    };
+
+    getProduct();
+  }, []);
 
   const {
     imgUrl,
     productName,
     price,
-    avgRating,
+    // avgRating,
     description,
     shortDesc,
     category,
@@ -53,9 +75,7 @@ const ProductDetails = () => {
       rating,
     };
 
-    setReviews((prevReviews) => [...prevReviews
-      , reviewObj
-    ])
+    setReviews((prevReviews) => [...prevReviews, reviewObj]);
 
     toast.success(`Review Submitted`);
   };
@@ -108,13 +128,12 @@ const ProductDetails = () => {
                     <span>
                       <IoStarHalf />
                     </span>
-                    <p className="fs-5">({avgRating}) ratings</p>
                   </div>
                 </div>
 
                 <div className="d-flex align-items-center gap-5">
                   <span className="product__price">${price}</span>
-                  <span>Category: {category.toUpperCase()}</span>
+                  <span>Category: {category?.toUpperCase()}</span>
                 </div>
                 <p className="mt-3">{shortDesc}</p>
 
