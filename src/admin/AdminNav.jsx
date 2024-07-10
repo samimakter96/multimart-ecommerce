@@ -51,7 +51,7 @@ const AdminNav = () => {
                 <span>
                   <IoSettingsOutline size={"20px"} />
                 </span>
-                <img src={currentUser.photoURL} alt="" />
+                <img src={currentUser && currentUser.photoURL} alt="" />
               </div>
             </div>
             <Row></Row>
