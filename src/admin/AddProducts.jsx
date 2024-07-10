@@ -74,7 +74,7 @@ const AddProducts = () => {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Double sofa"
+                      placeholder="Enter product title"
                       required
                       value={enterTitle}
                       onChange={(e) => setEnterTitle(e.target.value)}
@@ -85,7 +85,7 @@ const AddProducts = () => {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="lorem....."
+                      placeholder="Enter short description"
                       required
                       value={enterShortDesc}
                       onChange={(e) => setEnterShortDesc(e.target.value)}
@@ -109,7 +109,7 @@ const AddProducts = () => {
                       <input
                         className="form-control"
                         type="number"
-                        placeholder="$100"
+                        placeholder="Enter price"
                         required
                         value={enterPrice}
                         onChange={(e) => setEnterPrice(e.target.value)}
