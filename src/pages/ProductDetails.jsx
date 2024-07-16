@@ -10,7 +10,6 @@ import ProductList from "../components/UI/ProductList";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/slices/cartSlice";
 import { toast } from "react-toastify";
-
 import { db } from "../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import useGetData from "../customHooks/useGetData";
@@ -40,6 +39,7 @@ const ProductDetails = () => {
   useEffect(() => {
     const getProduct = async () => {
       const docSnap = await getDoc(docRef);
+      console.log(docSnap.data())
 
       if (docSnap.exists()) {
         setProduct(docSnap.data());
@@ -50,6 +50,8 @@ const ProductDetails = () => {
 
     getProduct();
   }, []);
+
+  // const product = products.find((item) => item.id === id);
 
   const {
     imgUrl,

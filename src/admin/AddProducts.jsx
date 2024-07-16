@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Form, FormGroup } from "reactstrap";
 import { toast } from "react-toastify";
-
 import { db, storage } from "../firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
@@ -22,10 +21,7 @@ const AddProducts = () => {
     e.preventDefault();
     setLoading(true);
 
-    //  Add product to the firebase database
     try {
-      const docRef = await collection(db, "products");
-
       const storageRef = ref(
         storage,
         `productImages/${Date.now() + enterProductImg.name}`
@@ -33,25 +29,31 @@ const AddProducts = () => {
       const uploadTask = uploadBytesResumable(storageRef, enterProductImg);
 
       uploadTask.on(
-        () => {
-          toast.error("Images not uploaded!");
+        "state_changed",
+        (snapshot) => {
+          // Optional: You can add a progress indicator here if you want
         },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-            await addDoc(docRef, {
-              productName: enterTitle,
-              shortDesc: enterShortDesc,
-              description: enterDescription,
-              category: enterCategory,
-              price: enterPrice,
-              imgUrl: downloadURL,
-            });
+        (error) => {
+          // Handle error case
+          toast.error("Image not uploaded!");
+          setLoading(false);
+        },
+        async () => {
+          // Handle success case
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          await addDoc(collection(db, "products"), {
+            productName: enterTitle,
+            shortDesc: enterShortDesc,
+            description: enterDescription,
+            category: enterCategory,
+            price: enterPrice,
+            imgUrl: downloadURL,
           });
+          setLoading(false);
+          toast.success("Product successfully added!");
+          navigate("/dashboard/all-products");
         }
       );
-      setLoading(false);
-      toast.success("Product successfully added!");
-      navigate("/dashboard/all-products");
     } catch (error) {
       setLoading(false);
       toast.error("Product failed to be added");
@@ -64,7 +66,7 @@ const AddProducts = () => {
         <Row>
           <Col lg="12">
             {loading ? (
-              <h4>Loading....</h4>
+              <h4 className="py-5">Loading....</h4>
             ) : (
               <>
                 <h4 className="mb-5">Add Product</h4>
@@ -74,7 +76,7 @@ const AddProducts = () => {
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="Enter product title"
+                      placeholder="Enter product name"
                       required
                       value={enterTitle}
                       onChange={(e) => setEnterTitle(e.target.value)}

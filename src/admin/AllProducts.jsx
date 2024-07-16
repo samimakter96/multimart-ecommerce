@@ -33,14 +33,18 @@ const AllProducts = () => {
               </thead>
               <tbody>
                 {loading ? (
-                  <h3 className="py-5 text-center fw-bold">loading.....</h3>
+                  <tr>
+                    <td colSpan="5" className="text-center py-5 fw-bold">
+                      Loading...
+                    </td>
+                  </tr>
                 ) : (
                   productsData.map((item) => (
                     <tr key={item.id}>
                       <td>
                         <img src={item.imgUrl} alt="" />
                       </td>
-                      <td>{item.title}</td>
+                      <td>{item.productName}</td>
                       <td>{item.category}</td>
                       <td>${item.price}</td>
                       <td>

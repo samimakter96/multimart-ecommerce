@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CommonSection from "../components/UI/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import { IoSearchSharp } from "react-icons/io5";
 import "../styles/Shop.css";
 
-import products from "../assets/data/products";
 import ProductList from "../components/UI/ProductList";
+import useGetData from "../customHooks/useGetData";
 
 const Shop = () => {
-  const [productsData, setProductsData] = useState(products);
+  const { data: products, loading } = useGetData("products");
+  const [productsData, setProductsData] = useState([]);
+
+  // Update productsData when products are fetched
+  useEffect(() => {
+    setProductsData(products);
+  }, [products]);
 
   const handleFilter = (e) => {
     const filterValue = e.target.value;
@@ -30,7 +36,7 @@ const Shop = () => {
     );
 
     setProductsData(filteredSearchProducts);
-  }
+  };
 
   return (
     <div>
@@ -62,7 +68,11 @@ const Shop = () => {
             </Col>
             <Col lg="6" md="12">
               <div className="search__box">
-                <input type="text" placeholder="Search...." onChange={handleSearch}/>
+                <input
+                  type="text"
+                  placeholder="Search...."
+                  onChange={handleSearch}
+                />
                 <span>
                   <IoSearchSharp size={"20px"} />
                 </span>
@@ -75,7 +85,9 @@ const Shop = () => {
       <section>
         <Container>
           <Row>
-            {productsData.length === 0 ? (
+            {loading ? (
+              <h1 className="text-center fs-4">Loading...</h1>
+            ) : productsData.length === 0 ? (
               <h1 className="text-center fs-4">No products are found!</h1>
             ) : (
               <ProductList data={productsData} />

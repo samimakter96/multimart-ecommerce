@@ -3,7 +3,6 @@ import "../styles/Cart.css";
 import CommonSection from "../components/UI/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import { MdDelete } from "react-icons/md";
-import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteItem } from "../redux/slices/cartSlice";
 import { Link } from "react-router-dom";
@@ -11,6 +10,7 @@ import { Link } from "react-router-dom";
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log(cartItems)
   const totalAmount = useSelector((state) => state.cart.totalAmount);
 
   return (

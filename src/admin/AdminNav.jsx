@@ -5,12 +5,16 @@ import { IoSettingsOutline } from "react-icons/io5";
 
 import useAuth from "../customHooks/useAuth";
 import "../styles/AdminNav.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const admin__nav = [
   {
     display: "Dashboard",
     path: "/dashboard",
+  },
+  {
+    display: "Add-Product",
+    path: "/dashboard/add-product",
   },
   {
     display: "All-Products",
@@ -27,6 +31,7 @@ const admin__nav = [
 ];
 
 const AdminNav = () => {
+  const navigate = useNavigate()
   const { currentUser } = useAuth();
 
   return (
@@ -36,7 +41,7 @@ const AdminNav = () => {
           <Container>
             <div className="admin__nav-wrapper-top">
               <div className="logo">
-                <h2>Multimart</h2>
+                <h2 style={{ cursor: "pointer" }} onClick={() => navigate('/')}>Multimart</h2>
               </div>
               <div className="search__box">
                 <input type="text" placeholder="Search...." />

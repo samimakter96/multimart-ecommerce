@@ -48,12 +48,14 @@ const Header = () => {
   };
 
   const logout = () => {
-    signOut(auth).then(() => {
-      toast.success("Logged Out Successfully");
-      navigate("/login");
-    }).catch((error) => {
-      toast.error(error.message);
-    });
+    signOut(auth)
+      .then(() => {
+        toast.success("Logged Out Successfully");
+        navigate("/login");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
 
   useEffect(() => {
@@ -114,17 +116,16 @@ const Header = () => {
                   alt="user_icon"
                   onClick={toggleProfileActions}
                 />
-                <div
-                  className="profile__actions"
-                  ref={profileActionRef}
-                >
+                <div className="profile__actions" ref={profileActionRef}>
                   {currentUser ? (
-                    <span onClick={logout}>Logout</span>
+                    <div  className="d-flex align-items-center justify-content-center flex-column">
+                      <span onClick={logout}>Logout</span>
+                      <Link to="/dashboard">Dashboard</Link>
+                    </div>
                   ) : (
                     <div className="d-flex align-items-center justify-content-center flex-column">
                       <Link to="/signup">Signup</Link>
                       <Link to="/login">Login</Link>
-                      <Link to="/dashboard">Dashboard</Link>
                     </div>
                   )}
                 </div>

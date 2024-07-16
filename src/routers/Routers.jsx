@@ -22,17 +22,17 @@ const Routers = () => {
       <Route path="/shop" element={<Shop />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/product/:id" element={<ProductDetails />} />
-
-      <Route path="/*" element={<ProtectedRoute />}>
-        <Route path="checkout" element={<Checkout />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="dashboard/all-products" element={<AllProducts />} />
-        <Route path="dashboard/add-product" element={<AddProducts />} />
-        <Route path="dashboard/users" element={<Users />} />
-      </Route>
-
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+
+      {/* Protected Routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/all-products" element={<AllProducts />} />
+        <Route path="/dashboard/add-product" element={<AddProducts />} />
+        <Route path="/dashboard/users" element={<Users />} />
+      </Route>
     </Routes>
   );
 };
