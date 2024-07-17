@@ -2,6 +2,10 @@
   background: var(--hero-bg);
 }
 
+.hero__content {
+  padding-top: 45px;
+}
+
 .hero__content h2 {
   color: var(--primary-color);
   font-size: 2.5rem;
@@ -34,9 +38,6 @@
   color: #ddd;
 }
 
-.hero__content {
-  padding-top: 45px;
-}
 
 .timer__count {
   background: var(--primary-color);

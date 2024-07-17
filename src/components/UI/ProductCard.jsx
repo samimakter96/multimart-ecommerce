@@ -9,7 +9,6 @@ import { addItem } from "../../redux/slices/cartSlice";
 import { toast } from 'react-toastify';
 
 const ProductCard = ({ item }) => {
-  console.log(item)
   const dispatch = useDispatch();
 
   const addToCart = () => {

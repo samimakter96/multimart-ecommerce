@@ -8,8 +8,8 @@ import Services from "../services/Services";
 import ProductList from "../components/UI/ProductList";
 import counterImg from "../assets/images/counter-timer-img.png";
 import Clock from "../components/UI/Clock";
-
 import useGetData from "../customHooks/useGetData";
+import HomeCarousel from "../components/UI/HomeCarousel";
 
 const Home = () => {
   const { data: products, loading } = useGetData("products");
@@ -20,7 +20,7 @@ const Home = () => {
   const [wirelessProducts, setWirelessProducts] = useState([]);
   const [popularProducts, setPopularProducts] = useState([]);
 
-  const year = new Date().getFullYear();
+  // const year = new Date().getFullYear();
 
   useEffect(() => {
     const filteredTrendingProducts = products.filter(
@@ -52,8 +52,8 @@ const Home = () => {
 
   return (
     <>
-      <section className="hero__section">
-        <Container>
+      <section>
+        {/* <Container>
           <Row>
             <Col lg="6" md="6">
               <div className="hero__content">
@@ -69,14 +69,16 @@ const Home = () => {
                 </motion.button>
               </div>
             </Col>
-
             <Col lg="6" md="6">
               <div className="hero__img">
-                <img src={heroImg} alt="" />
+                <img src={heroImg} alt="Hero" />
               </div>
             </Col>
           </Row>
-        </Container>
+        
+        </Container> */}
+
+        <HomeCarousel />
       </section>
 
       <Services />
@@ -120,7 +122,6 @@ const Home = () => {
                 <h3 className="text-white fs-5 mb-3">Quality Armchair</h3>
               </div>
               <Clock />
-
               <motion.button
                 whileTap={{ scale: 1.2 }}
                 className="buy__btn store__btn"
