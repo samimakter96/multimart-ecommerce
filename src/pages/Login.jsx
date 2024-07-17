@@ -29,7 +29,7 @@ const Login = () => {
       const user = userCredential.user;
       setLoading(false);
       toast.success("Logged in successfully!");
-      navigate("/checkout");
+      navigate("/");
     } catch (error) {
       setLoading(false);
       toast.error(error.message);

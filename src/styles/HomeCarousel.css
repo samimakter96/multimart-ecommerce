@@ -1,6 +1,6 @@
 swiper-container {
   width: 100%;
-  height: 700px;
+  height: 800px;
   position: relative; /* Added for positioning the button */
 }
 
@@ -19,6 +19,7 @@ swiper-slide img {
   object-fit: cover;
   object-position: center;
 }
+
 .shop__btn {
   position: absolute;
   bottom: 60px;

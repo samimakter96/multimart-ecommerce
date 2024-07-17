@@ -36,6 +36,7 @@ const Header = () => {
   const navigate = useNavigate();
   const { currentUser } = useAuth();
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const totalFavorites = useSelector((state) => state.cart.favorites);
 
   const profileActionRef = useRef(null);
 
@@ -100,9 +101,12 @@ const Header = () => {
             </div>
 
             <div className="nav__icons">
-              <span className="fav__icon">
+              <span
+                className="fav__icon"
+                onClick={() => navigate("/favorite-products")}
+              >
                 <FaRegHeart size={"22px"} />
-                <span className="badge">1</span>
+                <span className="badge">{totalFavorites.length}</span>
               </span>
               <span className="cart__icon" onClick={() => navigate("/cart")}>
                 <GrCart size={"22px"} />
@@ -118,7 +122,7 @@ const Header = () => {
                 />
                 <div className="profile__actions" ref={profileActionRef}>
                   {currentUser ? (
-                    <div  className="d-flex align-items-center justify-content-center flex-column">
+                    <div className="d-flex align-items-center justify-content-center flex-column">
                       <span onClick={logout}>Logout</span>
                       <Link to="/dashboard">Dashboard</Link>
                     </div>

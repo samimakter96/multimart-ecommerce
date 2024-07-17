@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // Initial state for the cart
 const initialState = {
   cartItems: [], // Array to store items in the cart
+  favorites: [],
   totalAmount: 0, // Total cost of all items in the cart
   totalQuantity: 0, // Total quantity of all items in the cart
 };
@@ -57,12 +58,33 @@ const cartSlice = createSlice({
 
       state.totalAmount = state.cartItems.reduce(
         (total, item) => total + Number(item.totalPrice),
-        0 
+        0
       );
+    },
+    addFavorite: (state, action) => {
+      const newItem = action.payload;
+
+      const existingFavorite = state.favorites.find(
+        (item) => item.id === newItem.id
+      );
+
+      if (!existingFavorite) {
+        state.favorites.push({
+          id: newItem.id,
+          productName: newItem.productName,
+          imgUrl: newItem.imgUrl,
+          price: newItem.price,
+        });
+      }
+    },
+    deleteFavorite: (state, action) => {
+      const id = action.payload;
+      state.favorites = state.favorites.filter((item) => item.id !== id);
     },
   },
 });
 
 // Export the addItem action and the cart reducer
-export const { addItem, deleteItem } = cartSlice.actions;
+export const { addItem, deleteItem, addFavorite, deleteFavorite } =
+  cartSlice.actions;
 export default cartSlice.reducer;

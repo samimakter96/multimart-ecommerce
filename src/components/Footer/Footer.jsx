@@ -12,20 +12,20 @@ const Footer = () => {
     <footer className="footer">
       <Container>
         <Row>
-          <Col lg="4" className="mb-4" md='6'>
+          <Col lg="4" className="mb-4" md="6">
             <div className="logo">
               <div>
                 <h1 className="text-white">Multimart</h1>
               </div>
             </div>
             <p className="footer__text mt-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis,
-              delectus vitae. Sunt distinctio quae esse voluptatum rerum nisi
-              natus tempore?
+              Discover a brand where you can find everything you need for your
+              home and beyond. From stylish furniture to essential household
+              items, we offer quality and variety that fit your lifestyle.
             </p>
           </Col>
 
-          <Col lg="3" md='3' className="mb-4">
+          <Col lg="3" md="3" className="mb-4">
             <div className="footer__quick-links">
               <h4 className="quick__links-title">Top Categories</h4>
               <ListGroup>
@@ -45,7 +45,7 @@ const Footer = () => {
             </div>
           </Col>
 
-          <Col lg="2" md='3' className="mb-4">
+          <Col lg="2" md="3" className="mb-4">
             <div className="footer__quick-links">
               <h4 className="quick__links-title">Useful Links</h4>
               <ListGroup>
@@ -65,7 +65,7 @@ const Footer = () => {
             </div>
           </Col>
 
-          <Col lg="3" md='4'>
+          <Col lg="3" md="4">
             <div className="footer__quick-links">
               <h4 className="quick__links-title">Contact</h4>
               <ListGroup className="footer__contact">

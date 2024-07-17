@@ -13,6 +13,7 @@ import AddProducts from "../admin/AddProducts";
 import AllProducts from "../admin/AllProducts";
 import Dashboard from "../admin/Dashboard";
 import Users from "../admin/Users";
+import FavoriteProducts from "../pages/FavoriteProducts";
 
 const Routers = () => {
   return (
@@ -21,6 +22,7 @@ const Routers = () => {
       <Route path="/home" element={<Home />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/favorite-products" element={<FavoriteProducts />} />
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />

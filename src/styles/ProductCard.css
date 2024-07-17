@@ -1,5 +1,37 @@
 .product__item {
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;;
+  height: 100%; /* Ensure the item takes full height of its container */
+  border: 1px solid #ddd; /* Example border for visual separation */
+  border-radius: 8px; /* Rounded corners for a card-like appearance */
+  overflow: hidden; /* Ensure contents don't overflow */
+  transition: box-shadow 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.product__item:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Example box shadow on hover */
+}
+
+.product__item > a {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure the link takes full height */
+}
+
+.product__img {
+  flex: 1; /* Make the image expand to fill remaining space */
+  overflow: hidden; /* Ensure the image doesn't overflow */
+}
+
+.product__img img {
+  width: 100%;
+  height: 100%; /* Ensure the image fills its container */
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
+.product__info {
+  padding: 10px;
+  background-color: #f0f0f0;
 }
 
 .product__info h3 {
@@ -7,10 +39,7 @@
   color: var(--primary-color);
   font-weight: 700;
   margin-top: 15px;
-}
-
-.product__info a:hover {
-  color: inherit;
+  margin-bottom: 10px; /* Adjust spacing as needed */
 }
 
 .product__info span {
@@ -18,17 +47,25 @@
 }
 
 .product__card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fafafa;
+  border-top: 1px solid #ddd;
+  padding: 10px;
   color: var(--primary-color);
   font-size: 1.3rem;
   font-weight: 500;
 }
 
-.product__card-bottom .plus__btn {
+.heart__btn {
   font-size: 2rem;
-  padding: 5px;
-  background: var(--primary-color);
-  color: #fff;
-  border-radius: 50px;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.heart__btn:hover {
+  transform: scale(1.2); /* Example hover effect */
 }
 
 @media only screen and (max-width: 992px) {

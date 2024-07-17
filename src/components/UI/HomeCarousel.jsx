@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import './HomeCarousel.css';
+import '../../styles/HomeCarousel.css';
 
 const HomeCarousel = () => {
   const images = [
