@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // Initial state for the cart
 const initialState = {
   cartItems: [], // Array to store items in the cart
-  favorites: [],
+  favorites: [], // Array to store favorite item 
   totalAmount: 0, // Total cost of all items in the cart
   totalQuantity: 0, // Total quantity of all items in the cart
 };

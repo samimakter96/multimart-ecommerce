@@ -5,6 +5,7 @@ import { doc, deleteDoc } from "firebase/firestore";
 import useGetData from "../customHooks/useGetData";
 import { toast } from "react-toastify";
 import { motion } from "framer-motion";
+import { SyncLoader } from "react-spinners";
 
 const AllProducts = () => {
   const { data: productsData, loading } = useGetData("products");
@@ -34,8 +35,8 @@ const AllProducts = () => {
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colSpan="5" className="text-center py-5 fw-bold">
-                      Loading...
+                    <td colSpan="5" className="text-center py-5">
+                    <SyncLoader color="#36d7b7" />
                     </td>
                   </tr>
                 ) : (

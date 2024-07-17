@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { toast } from "react-toastify";
-
-
+import { ScaleLoader } from "react-spinners";
 import "../styles/Login.css";
 
 const Login = () => {
@@ -41,8 +40,12 @@ const Login = () => {
       <Container>
         <Row>
           {loading ? (
-            <Col lg="12" className="text-center">
-              <h5 className="fw-bold">Loading....</h5>
+            <Col
+              lg="12"
+              className=" mt-4 d-flex justify-content-center align-items-center"
+              style={{ height: "100%" }}
+            >
+              <ScaleLoader color="#36d7b7" />
             </Col>
           ) : (
             <Col

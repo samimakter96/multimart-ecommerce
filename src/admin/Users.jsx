@@ -4,6 +4,7 @@ import useGetData from "../customHooks/useGetData";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { toast } from "react-toastify";
+import { SyncLoader } from "react-spinners";
 
 const Users = () => {
 
@@ -34,7 +35,7 @@ const Users = () => {
 
               <tbody>
                 {
-                  loading ? <h5 className="pt-5 fw-bold">Loading....</h5> : usersData?.map(user => (
+                  loading ? <h5 className="pt-5 fw-bold"><SyncLoader color="#36d7b7" /></h5> : usersData?.map(user => (
                     <tr key={user.uid}>
                       <td><img src={user.photoURL} alt="" /></td>
                       <td>{user.displayName}</td>

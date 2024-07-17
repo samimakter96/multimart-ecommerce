@@ -3,7 +3,7 @@ import CommonSection from "../components/UI/CommonSection";
 import { Container, Row, Col } from "reactstrap";
 import { IoSearchSharp } from "react-icons/io5";
 import "../styles/Shop.css";
-
+import { PropagateLoader } from "react-spinners";
 import ProductList from "../components/UI/ProductList";
 import useGetData from "../customHooks/useGetData";
 
@@ -86,7 +86,9 @@ const Shop = () => {
         <Container>
           <Row>
             {loading ? (
-              <h1 className="text-center fs-4">Loading...</h1>
+              <h1 className="text-center fs-4">
+                <PropagateLoader color="#36d7b7" />
+              </h1>
             ) : productsData.length === 0 ? (
               <h1 className="text-center fs-4">No products are found!</h1>
             ) : (

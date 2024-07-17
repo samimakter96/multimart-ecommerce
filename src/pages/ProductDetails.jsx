@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { db } from "../firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import useGetData from "../customHooks/useGetData";
+import { PropagateLoader } from "react-spinners";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
@@ -32,14 +33,13 @@ const ProductDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
-  const { data: products } = useGetData("products");
+  const { data: products, loading } = useGetData("products");
 
   const docRef = doc(db, "products", id);
 
   useEffect(() => {
     const getProduct = async () => {
       const docSnap = await getDoc(docRef);
-      console.log(docSnap.data())
 
       if (docSnap.exists()) {
         setProduct(docSnap.data());
@@ -49,19 +49,10 @@ const ProductDetails = () => {
     };
 
     getProduct();
-  }, []);
+  }, [id]);
 
-  // const product = products.find((item) => item.id === id);
-
-  const {
-    imgUrl,
-    productName,
-    price,
-    // avgRating,
-    description,
-    shortDesc,
-    category,
-  } = product;
+  const { imgUrl, productName, price, description, shortDesc, category } =
+    product;
 
   const relatedProducts = products.filter((item) => item.category === category);
 
@@ -86,7 +77,7 @@ const ProductDetails = () => {
     dispatch(
       addItem({
         id,
-        image: imgUrl,
+        imgUrl,
         productName,
         price,
       })

@@ -9,6 +9,7 @@ import counterImg from "../assets/images/counter-timer-img.png";
 import Clock from "../components/UI/Clock";
 import useGetData from "../customHooks/useGetData";
 import HomeCarousel from "../components/UI/HomeCarousel";
+import { PropagateLoader } from "react-spinners";
 
 const Home = () => {
   const { data: products, loading } = useGetData("products");
@@ -18,8 +19,6 @@ const Home = () => {
   const [mobileProducts, setMobileProducts] = useState([]);
   const [wirelessProducts, setWirelessProducts] = useState([]);
   const [popularProducts, setPopularProducts] = useState([]);
-
-  // const year = new Date().getFullYear();
 
   useEffect(() => {
     const filteredTrendingProducts = products.filter(
@@ -64,7 +63,13 @@ const Home = () => {
               <h2 className="section__title">Trending Products</h2>
             </Col>
             {loading ? (
-              <h5 className="fw-bold">Loading....</h5>
+              <Col
+                lg="12"
+                className=" mt-4 d-flex justify-content-center align-items-center"
+                style={{ height: "100%" }}
+              >
+                <PropagateLoader color="#36d7b7" />
+              </Col>
             ) : (
               <ProductList data={trendingProducts} />
             )}
@@ -79,7 +84,13 @@ const Home = () => {
               <h2 className="section__title">Best Sales</h2>
             </Col>
             {loading ? (
-              <h5 className="fw-bold">Loading....</h5>
+              <Col
+                lg="12"
+                className=" mt-4 d-flex justify-content-center align-items-center"
+                style={{ height: "100%" }}
+              >
+                <PropagateLoader color="#36d7b7" />
+              </Col>
             ) : (
               <ProductList data={bestSalesProducts} />
             )}
@@ -117,7 +128,13 @@ const Home = () => {
               <h2 className="section__title">New Arrivals</h2>
             </Col>
             {loading ? (
-              <h5 className="fw-bold">Loading....</h5>
+              <Col
+                lg="12"
+                className=" mt-4 d-flex justify-content-center align-items-center"
+                style={{ height: "100%" }}
+              >
+                <PropagateLoader color="#36d7b7" />
+              </Col>
             ) : (
               <ProductList data={mobileProducts} />
             )}
@@ -134,7 +151,13 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg="12" className="text-center mb-5">
-              <h2 className="section__title">Popular Category</h2>
+              <Col
+                lg="12"
+                className=" mt-4 d-flex justify-content-center align-items-center"
+                style={{ height: "100%" }}
+              >
+                <PropagateLoader color="#36d7b7" />
+              </Col>
             </Col>
             {loading ? (
               <h5 className="fw-bold">Loading....</h5>

@@ -5,6 +5,7 @@ import { db, storage } from "../firebaseConfig";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import { SyncLoader } from "react-spinners";
 
 const AddProducts = () => {
   const [enterTitle, setEnterTitle] = useState("");
@@ -66,7 +67,13 @@ const AddProducts = () => {
         <Row>
           <Col lg="12">
             {loading ? (
-              <h4 className="py-5">Loading....</h4>
+              <Col
+                lg="12"
+                className=" mt-4 d-flex justify-content-center align-items-center"
+                style={{ height: "100%" }}
+              >
+                <SyncLoader color="#36d7b7" />
+              </Col>
             ) : (
               <>
                 <h4 className="mb-5">Add Product</h4>

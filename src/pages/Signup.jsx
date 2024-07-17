@@ -9,6 +9,7 @@ import { storage } from "../firebaseConfig";
 import { db } from "../firebaseConfig";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { ScaleLoader } from "react-spinners";
 import "../styles/Login.css";
 
 const Signup = () => {
@@ -72,8 +73,12 @@ const Signup = () => {
     <div>
       <Container>
         {loading ? (
-          <Col lg="12" className="text-center">
-            <h5 className="fw-bold">Loading.....</h5>
+          <Col
+            lg="12"
+            className=" mt-4 d-flex justify-content-center align-items-center"
+            style={{ height: "100%" }}
+          >
+            <ScaleLoader color="#36d7b7" />
           </Col>
         ) : (
           <Row>
